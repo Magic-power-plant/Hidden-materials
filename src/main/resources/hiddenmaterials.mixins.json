@@ -1,9 +1,9 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.mpp.template.mixin",
+  "package": "com.mpp.hiddenmaterials.mixin",
   "compatibilityLevel": "JAVA_8",
-  "refmap": "template.refmap.json",
+  "refmap": "hiddenmaterials.refmap.json",
   "mixins": [
   ],
   "client": [

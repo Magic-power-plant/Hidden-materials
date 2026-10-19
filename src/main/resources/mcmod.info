@@ -2,7 +2,7 @@
 {
   "modid": "${modid}",
   "name": "${modname}",
-  "description": "MPP DevTemplate",
+  "description": "Hidden Materials",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
