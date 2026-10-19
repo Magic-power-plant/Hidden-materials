@@ -40,12 +40,38 @@ tasks.named('injectTags') {
 
 repositories {
     maven { url = 'https://maven.cleanroommc.com' }
+    maven {
+        name = 'BlameJared'
+        url = 'https://maven.blamejared.com'
+    }
+    maven {
+        name = 'CurseMaven'
+        url = 'https://cursemaven.com'
+        content { includeGroup 'curse.maven' }
+    }
 }
 
 dependencies {
     def mixin = modUtils.enableMixins("zone.rong:mixinbooter:${project.mixinbooter_version}", mixinRefmap)
     implementation(mixin) { transitive = false }
     annotationProcessor mixin
+
+    // Other 1.12.2 mods this mod compiles and runs against. rfg.deobf remaps each
+    // published jar from SRG names to this workspace's MCP names.
+    // CraftTweaker: https://github.com/CraftTweaker/CraftTweaker (BlameJared maven).
+    implementation rfg.deobf("CraftTweaker2:CraftTweaker2-MC1120-Main:${project.crafttweaker_version}")
+    // Game Stages 1.12.2: https://github.com/Darkhax-Minecraft/Game-Stages (BlameJared maven).
+    implementation rfg.deobf("net.darkhax.gamestages:GameStages-1.12.2:${project.gamestages_version}")
+    // Tinkers' Antique: https://www.curseforge.com/minecraft/mc-mods/tinkers-antique (no official maven).
+    implementation rfg.deobf("curse.maven:tinkers-antique-${project.tinkers_antique_project_id}:${project.tinkers_antique_file_id}")
+    // Mantle: https://www.curseforge.com/minecraft/mc-mods/mantle (no official maven for 1.12.2).
+    // Tinkers' book and material classes extend Mantle types, so it must be on
+    // the compile classpath to touch them.
+    implementation rfg.deobf("curse.maven:mantle-${project.mantle_project_id}:${project.mantle_file_id}")
+    // Bookshelf: https://www.curseforge.com/minecraft/mc-mods/bookshelf. Game Stages
+    // declares it as a required dependency, so dev runs need it present; this mod
+    // itself never references its classes.
+    implementation rfg.deobf("curse.maven:bookshelf-${project.bookshelf_project_id}:${project.bookshelf_file_id}")
 }
 
 tasks.named('processResources') {

@@ -11,6 +11,11 @@
   "credits": "",
   "logoFile": "",
   "screenshots": [],
-  "dependencies": []
+  "dependencies": [
+    "required-after:mixinbooter",
+    "required-after:crafttweaker",
+    "required-after:gamestages",
+    "required-after:tconstruct"
+  ]
 }
 ]
